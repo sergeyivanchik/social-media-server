@@ -2,11 +2,10 @@ const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const app = express()
-const server = require('http').createServer(app)
 const jsonParser = express.json()
 const cors = require('cors')
 const toJson = require('@meanie/mongoose-to-json')
+const { app, server } = require('./socket')
 
 const PORT = config.get('port') || 5000
 

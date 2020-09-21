@@ -58,6 +58,12 @@ const getUser = async (req, res) => {
     });
 }
 
+const changeOnline = async (data) => {
+  return await User.updateOne({ _id: data.userId }, { online: data.online })
+  .then(user => user)
+  .catch(error => console.log(error))
+};
+
 // const login = async (req, res) => {
 //   const user = await User.findOne({ username: req.body.username });
 //   if (!user || !service.isValidPassword(user, req.body.password)) {
@@ -83,7 +89,8 @@ const getUser = async (req, res) => {
 
 module.exports = {
   setUser,
-  getUser
+  getUser,
+  changeOnline
   // signup,
   // login,
   // getToken,
