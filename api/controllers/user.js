@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-User = mongoose.model('User');
+const mongoose = require('mongoose')
+User = mongoose.model('User')
 
 
 // const signup = async (req, res) => {
@@ -41,20 +41,21 @@ const setUser = async (req, res) => {
     .catch(error => {
       res.status(500).send({
         message: error.message
-      });
-      res.send(error);
+      })
+      res.send(error)
     })
 }
 
 const getUser = async (req, res) => {
   await User.findById(req.params.id)
     .populate('friends')
+    .populate('chats')
     .then(user => res.send(user))
     .catch(error => {
       res.status(500).send({
         message: error.message
-      });
-      res.send(error);
+      })
+      res.send(error)
     });
 }
 
@@ -62,7 +63,7 @@ const changeOnline = async (data) => {
   return await User.updateOne({ _id: data.userId }, { online: data.online })
   .then(user => user)
   .catch(error => console.log(error))
-};
+}
 
 // const login = async (req, res) => {
 //   const user = await User.findOne({ username: req.body.username });

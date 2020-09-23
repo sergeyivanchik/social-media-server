@@ -8,4 +8,4 @@ router.route('/setUser')
 router.route('/user/:id')
   .get(userController.getUser)
 
-module.exports = router;
+module.exports = router

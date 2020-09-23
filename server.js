@@ -13,6 +13,7 @@ mongoose.plugin(toJson);
 
 require('./api/utils/db.js').setUpConnection()
 require('./api/models/user')
+require('./api/models/chat')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
