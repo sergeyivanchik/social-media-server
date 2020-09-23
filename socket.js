@@ -35,6 +35,10 @@ io.sockets.on('connection', function (socket) {
     }
   })
 
+  socket.on('typingMessage', data => {
+    io.sockets.connected[users.get(data.to).socketId].emit('typingMessage', data.from)
+  })
+
   socket.on('disconnect', () => {
     const currentUser = users.remove(socket.id)
 
