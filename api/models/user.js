@@ -10,11 +10,11 @@ const userSchema = new Schema({
   marital_status: { type: String, default: '' },
   hometown: { type: String, default: '' },
   languages: { type: Array, default: [] },
-  grandparents: [{type: Schema.ObjectId, ref: "User"}],
-  parents: [{type: Schema.ObjectId, ref: "User"}],
-  brothers_sisters: [{type: Schema.ObjectId, ref: "User"}],
-  children: [{type: Schema.ObjectId, ref: "User"}],
-  grandchildren: [{type: Schema.ObjectId, ref: "User"}],
+  grandparents: [{ type: Schema.ObjectId, ref: "User" }],
+  parents: [{ type: Schema.ObjectId, ref: "User" }],
+  brothers_sisters: [{ type: Schema.ObjectId, ref: "User" }],
+  children: [{ type: Schema.ObjectId, ref: "User" }],
+  grandchildren: [{ type: Schema.ObjectId, ref: "User" }],
   site: { type: String, default: '' },
   mobile_phone: { type: String, default: '' },
   additional_phone: { type: String, default: '' },
@@ -27,14 +27,14 @@ const userSchema = new Schema({
   favourite_books: { type: String, default: '' },
   favourite_quotes: { type: String, default: '' },
   about_me: { type: String, default: '' },
-  friends: [{type: Schema.ObjectId, ref: "User"}],
+  friends: [{ type: Schema.ObjectId, ref: "User" }],
   email: { type: String },
   password: { type: String },
   photos: [{
     photo: { type: String },
     isAvatar: { type: Boolean, default: false }
   }],
-  status: { type: String, default: false },
+  status: { type: String, default: '' },
   online: { type: String, default: '' }
 },
 {

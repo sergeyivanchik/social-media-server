@@ -28,7 +28,7 @@ const getChatByParticipants = async data => {
     .then(chat => {
       const users = [data.from, data.to]
       const currentChat = chat.find(elem =>
-        elem.participants.every(user => users.indexOf(user) !== -1)
+        elem.participants.every(user => users.indexOf(String(user)) !== -1)
       )
 
       return currentChat
@@ -60,6 +60,7 @@ const addNewMessageInCurrentChat = async data => {
 
 const getCurrentUserChats = async (req, res) => {
   await Chat.find()
+    .populate('participants')
     .then(data => {
       const chats = data.filter(chat =>
         chat.participants.indexOf(elem => elem === req.params.userId)

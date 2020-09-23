@@ -31,6 +31,7 @@ io.sockets.on('connection', function (socket) {
       } else {
         await chatController.addNewMessageInCurrentChat({...data, chatId: chat._id})
       }
+      io.sockets.connected[users.get(data.to).socketId].emit('newMessage')
     }
   })
 
