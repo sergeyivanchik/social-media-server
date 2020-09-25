@@ -31,11 +31,14 @@ io.sockets.on('connection', function (socket) {
       } else {
         await chatController.addNewMessageInCurrentChat({...data, chatId: chat._id})
       }
-      io.sockets.connected[users.get(data.to).socketId].emit('newMessage')
+      users.get(data.to)?.socketId &&
+      io.sockets.connected[users.get(data.to).socketId].emit('newMessage', chat._id)
     }
   })
 
-  socket.on('typingMessage', data => {
+  socket.on('typingMessage', async data => {
+    const chat = await chatController.getChatByParticipants({ from: data.from, to: data.to })
+    users.get(data.to)?.socketId &&
     io.sockets.connected[users.get(data.to).socketId].emit('typingMessage', data.from)
   })
 

@@ -63,8 +63,9 @@ const getCurrentUserChats = async (req, res) => {
     .populate('participants')
     .then(data => {
       const chats = data.filter(chat =>
-        chat.participants.indexOf(elem => elem === req.params.userId)
+        chat.participants.find(elem => elem.id === req.params.userId)
       )
+
       res.send(chats || [])
     })
     .catch(error => console.log(error))
@@ -76,10 +77,41 @@ const getChatById = async (chatId) => {
     .catch(error => console.log(error))
 }
 
+const getCurrentChat = async (req, res) => {
+  await Chat.findById(req.params.id)
+    .populate('participants')
+    .then(data => {
+      res.send(data)
+    })
+    .catch(error => {
+      res.status(500).send({
+        message: error.message
+      })
+      res.send(error)
+    })
+}
+
+const getMesssagesFromCurrentChat = async (req, res) => {
+  await Chat.findById(req.params.id)
+    .populate({
+      path: 'messages.from',
+      model: 'User'
+    })
+    .then(chat => res.send(chat.messages))
+    .catch(error => {
+      res.status(500).send({
+        message: error.message
+      })
+      res.send(error)
+    })
+}
+
 module.exports = {
+  getMesssagesFromCurrentChat,
   getChatById,
   getCurrentUserChats,
   createChat,
   getChatByParticipants,
-  addNewMessageInCurrentChat
+  addNewMessageInCurrentChat,
+  getCurrentChat
 }
