@@ -37,7 +37,6 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('typingMessage', async data => {
-    const chat = await chatController.getChatByParticipants({ from: data.from, to: data.to })
     users.get(data.to)?.socketId &&
     io.sockets.connected[users.get(data.to).socketId].emit('typingMessage', data.from)
   })
