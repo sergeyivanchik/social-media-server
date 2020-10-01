@@ -33,6 +33,7 @@ io.sockets.on('connection', function (socket) {
       }
       users.get(data.to)?.socketId &&
       io.sockets.connected[users.get(data.to).socketId].emit('newMessage', chat._id)
+      io.sockets.connected[users.get(data.from).socketId].emit('newMessage', chat._id)
     }
   })
 
