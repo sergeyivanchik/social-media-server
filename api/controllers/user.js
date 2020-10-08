@@ -50,6 +50,8 @@ const getUser = async (req, res) => {
   await User.findById(req.params.id)
     .populate('friends')
     .populate('chats')
+    .populate('incomingFriendRequests')
+    .populate('outgoingFriendRequests')
     .then(user => res.send(user))
     .catch(error => {
       res.status(500).send({
@@ -64,6 +66,8 @@ const changeOnline = async (data) => {
   .then(user => user)
   .catch(error => console.log(error))
 }
+
+
 
 // const login = async (req, res) => {
 //   const user = await User.findOne({ username: req.body.username });
@@ -91,7 +95,7 @@ const changeOnline = async (data) => {
 module.exports = {
   setUser,
   getUser,
-  changeOnline
+  changeOnline,
   // signup,
   // login,
   // getToken,

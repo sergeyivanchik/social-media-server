@@ -35,7 +35,9 @@ const userSchema = new Schema({
     isAvatar: { type: Boolean, default: false }
   }],
   status: { type: String, default: '' },
-  online: { type: String, default: '' }
+  online: { type: String, default: '' },
+  incomingFriendRequests: { type: Array, default: [] },
+  outgoingFriendRequests: { type: Array, default: [] }
 },
 {
   versionKey: false
