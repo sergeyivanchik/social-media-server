@@ -8,4 +8,10 @@ router.route('/setUser')
 router.route('/user/:id')
   .get(userController.getUser)
 
+router.route('/incomingFriendRequests/:userId')
+  .get(userController.getIncomingFriendRequests)
+
+router.route('/outgoingFriendRequests/:userId')
+  .get(userController.getOutgoingFriendRequests)
+
 module.exports = router

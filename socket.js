@@ -50,6 +50,18 @@ io.sockets.on('connection', function (socket) {
       userController.changeOnline(data)
     }
   })
+
+  socket.on('unsubscribe', async data => {
+    await userController.unsubscribe({ from: data.from, to: data.to, info: 'from'})
+    await userController.unsubscribe({ from: data.to, to: data.from, info: 'to'})
+  })
+
+  socket.on('addFriend', async data => {
+    await userController.addFriend({ from: data.from, to: data.to })
+    await userController.unsubscribe({ from: data.to, to: data.from, info: 'from'})
+    await userController.addFriend({ from: data.to, to: data.from })
+    await userController.unsubscribe({ from: data.from, to: data.to, info: 'to'})
+  })
 })
 
 module.exports = {
