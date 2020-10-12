@@ -58,6 +58,13 @@ io.sockets.on('connection', function (socket) {
     io.sockets.connected[users.get(data.from).socketId].emit('unsubscribe')
   })
 
+  socket.on('dontAddFriend', async data => {
+    await userController.unsubscribe({ from: data.from, to: data.to, info: 'to'})
+    await userController.unsubscribe({ from: data.to, to: data.from, info: 'from'})
+    io.sockets.connected[users.get(data.to).socketId].emit('unsubscribe')
+    io.sockets.connected[users.get(data.from).socketId].emit('unsubscribe')
+  })
+
   socket.on('addFriend', async data => {
     await userController.addFriend({ from: data.from, to: data.to })
     await userController.unsubscribe({ from: data.to, to: data.from, info: 'from'})
